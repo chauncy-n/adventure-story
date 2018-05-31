@@ -1,0 +1,73 @@
+left = ['left','the left','the left path','the path to the left','the left one' ]
+right =['right','the right','the right path','the path to the right','the right one',
+'the correct path','correct path']
+accross = ['1','cross the bridge','cross bridge','cross old bridge','cross the old bridge']
+upstream = ['2','go upstream','follow the river upstream','upstream']
+downstream = ['3','downstream','follow the river downstream','follow river downstream',
+'I follow the river downstream']
+inspect_bridge = ['inspect bridge','Inspect bridge','look at bridge','is it a new bridge',
+'is it an old bridge','is the bridge safe','is it safe','is it safe?','is it old']
+
+
+def right_path answer)
+    if answer in left:
+        print("""I see you chose the left path. This is the wrong path for you. You
+should go back and choose the right path.""")
+        answer = input("> ")
+        right_path(answer)
+
+    elif answer in right:
+        print("""Ah, I see you have chosen the right path good for you. This path leads
+to a river that has an old bridge accross it.  What do you do.""")
+        print("1. Do you cross the bridge and continue on.")
+        print("2. Do you follow the river upstream." )
+        print("3. Follow the river downstream.")
+        answer = input(">")
+        first_bridge(answer)
+#if statement needed, to redo first bridge. Then can add move on to second bridge.
+        answer = input("> ")
+        second_bridge(answer)
+    else:
+        print("""your unwillingness to choose the left or right path path placed
+before you is confusing.  You need to sit down, you accidentally stumble and
+fall hitting your head on a rock.  You are now unconcious.""")
+
+def first_bridge(answer):
+    if answer in accross:
+        print("""Woops wrong choice. The bridge broke and fell apart, you fall into
+the river and die.  If only you had inspected the bridge first """)
+
+    elif answer in upstream:
+        print("""You travel upstream and find a lake.  You decide that you would like to
+go swimming.  You hop in the water. As you sink to the bottom you suddenly
+realize that you never learned how to swim. Your adventure is over.""")
+
+    # problem when adding or to if statement
+    elif answer in inspect_bridge or answer in downstream:
+        print("""You inspect the bridge and don't think it would hold up to well.
+You decide that walking downstream is the better option. """)
+        print("""While walking down the river you notice another bridge, this one
+seems much sturdier.  What do you do. """)
+        print("1. Cross this bridge on your left.")
+        print("2. Take the path to your right.")
+        print("3. Continue downstream.")
+    else:
+        print("""your unwillingness to choose the left or right path path placed
+before you is confusing.  You need to sit down, you accidentally stumble and
+fall hitting your head on a rock.  You are now unconcious.""")
+        print("please try again")
+        answer = input("> ")
+        first_bridge(answer)
+def second_bridge(answer):
+    if answer in inspect_bridge:
+        print("""After inspecting the bridge you beleive it will hold your weight.
+however you notice a nasty looking troll lurking under it.  Do you 1. Try to
+cross anyway.  2. try to talk to the Troll or 3. choose a different path.""")
+    elif answer in accross:
+        print("""You really wish you had inspected the bridge.  A troll
+jumps out and eats you. Your adventure has ended.""")
+
+    else:
+        print("""your unwillingness to choose the left or right path path placed
+before you is confusing.  You need to sit down, you accidentally stumble and
+fall hitting your head on a rock.  You are now unconcious.""")
