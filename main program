@@ -1,0 +1,17 @@
+from story_functions import *
+
+print("""You are leaving your home village to explore the world.  You see
+2 paths before you, one to the left and one to the right. Which path do you
+take?""")
+answer = input("> ")
+left = ['left','the left','the left path','the path to the left','the left one' ]
+right =['right','the right','the right path','the path to the right','the right one',
+'the correct path','correct path']
+accross = ['1','cross the bridge','cross bridge','cross old bridge','cross the old bridge']
+upstream = ['2','go upstream','follow the river upstream','upstream']
+downstream = ['3','downstream','follow the river downstream','follow river downstream','I follow the river downstream']
+inspect_bridge = ['inspect bridge','Inspect bridge','look at bridge','is it a new bridge',
+'is it an old bridge','is the bridge safe','is it safe','is it safe?','is it old']
+
+if answer in right:
+    right_path(answer)
