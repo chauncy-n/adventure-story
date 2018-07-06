@@ -2,7 +2,7 @@ from story_functions import *
 
 
 print("""You are leaving your home village to explore the world.  You see
-2 paths before you, one to the left and one to the right. Which path do you
+2 paths before you, one to the East and one to the West. Which path do you
 take?""")
 answer = input("> ")
 

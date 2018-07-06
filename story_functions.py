@@ -1,47 +1,61 @@
 from sys import exit
 
 left = ['left','the left','the left path','the path to the left','the left one' ]
-right =['2','right','the right','the right path','the path to the right','the right one',
+right =['right','the right','the right path','the path to the right','the right one',
 'the correct path','correct path']
-accross = ['1','cross the bridge','cross bridge','cross old bridge','cross the old bridge',
+accross = ['cross the bridge','cross bridge','cross old bridge','cross the old bridge',
 'cross anyway']
-upstream = ['2','go upstream','follow the river upstream','upstream']
-downstream = ['3','downstream','follow the river downstream','follow river downstream',
+correct_path = ['the correct path','correct path','the right one','the right path']
+upstream = ['go upstream','follow the river upstream','upstream']
+downstream = ['downstream','follow the river downstream','follow river downstream',
 'I follow the river downstream']
 inspect_bridge = ['inspect bridge','Inspect bridge','look at bridge','is it a new bridge',
 'is it an old bridge','is the bridge safe','is it safe','is it safe?','is it old']
 talk_to_troll = ['talk to troll','talk','3']
-
+north = ["north", "North","N","n"]
+east = ["East","east"]
+south = ["s","South","south"]
+west = ["west","West"]
+one = ["1"]
+two = ["2"]
+three = ["3"]
+###### after adding number list to choices if statements stopped working correctly
+###### also will choose some if statements as a default
+# create def nochoice for choice not allowed response(unconcious response)
+print("test")
 def right_path (answer):
-    if answer in right:
+    ### first option in story, only choice to move forward is choosing the "right" path
+    if answer in east or answer in  correct_path:
         print("""Ah, I see you have chosen the right path good for you. This path leads
 to a river that has an old bridge accross it.  What do you do.""")
-        print("1. Do you cross the bridge and continue on.")
-        print("2. Do you follow the river upstream." )
-        print("3. Follow the river downstream.")
+        print("1. Do you cross the bridge to the East and  continue on.")
+        print("2. Do you follow the river North upstream." )
+        print("3. Follow the river South downstream.")
         answer = input(">")
         old_bridge(answer)
-    elif answer in left:
-        print("""I see you chose the left path. This is the wrong path for you. You
-should go back and choose the correct path.""")
+    elif answer in west:
+        print("""I see you chose the path to the West path. This is the wrong path for
+you. You should go back and choose the correct path.""")
         answer = input("> ")
         right_path(answer)
     else:
-        print("""your unwillingness to choose the left or right path path placed
-before you is confusing.  You need to sit down, you accidentally stumble and
-fall hitting your head on a rock.  You are now unconcious.""")
+        print("""your unwillingness to choose one of the path paths placed
+        before you is confusing.  You need to sit down, you accidentally stumble and
+        fall hitting your head on a rock.  You are now unconcious.""")
 
 def old_bridge(answer):
-    if answer in accross:
+    ### 3 choices at old old_bridge upstream and accross call the dead function
+    ### downstream continues on story calls troll_bridge. else try again
+    if answer in east or answer in accross or answer in one:
         dead("""Woops wrong choice. The bridge broke and fell apart, you fall into
 the river and die.  If only you had inspected the bridge first """)
 
-    elif answer in upstream:
+    elif answer in north or answer in upstream or answer in two:
         dead("""You travel upstream and find a lake.  You decide that you would like to
 go swimming.  You hop in the water. As you sink to the bottom you suddenly
 realize that you never learned how to swim. Your adventure is over.""")
 
-    elif answer in inspect_bridge or answer in downstream:
+    elif answer in inspect_bridge or answer in south or answer in three:
         print(""" After inspecting this old bridge you don't think it would hold up to well.
 You decide that walking downstream is the better option. """)
         print("""While walking down the river you notice another bridge, this one
@@ -57,9 +71,13 @@ fall hitting your head on a rock.  You are now unconcious.""")
         answer = input("> ")
         old_bridge(answer)
 def troll_bridge(answer):
-    print("1. Cross this bridge on your left.")
-    print("2. Take the path to your right.")
-    print("3. Continue downstream.")
+    ### 3 questions west takes you back to the village and ends storyself. calls exit for now
+    ### accross calls dead function with troll jumping out
+    ###downstream is unfinished and suggests trying inspaect bridge reruns troll_bridge
+    ###inspect bridge is an unprompted response and calls troll_speak function
+    print("1. Cross this bridge on the east.")
+    print("2. Take the path to the West.")
+    print("3. Continue south downstream.")
     answer = input("> ")
     # possibly a while loop to get second answer. talk = false
     #need to fix while loop should be in inspect_bridge if statement with new
@@ -68,20 +86,28 @@ def troll_bridge(answer):
     if answer in inspect_bridge:
         troll_speak(answer)
         #   New function with while loop
-    # downstream answer needs to be in here
-    if answer in right:
+
+    elif answer in west or answer in two:
         print("""Ah what a great adventure this has been.  This path leads
 you back to your village.  You managed to stay alive and well.
 maybe next time you'll bring some supplies with you to help you on
 you journey. """)
+        exit(0)
 #### after your back at the village you can pick up supplies and start again if
-#### you want. Fubction village (start) should allow you to go back and get supplies
+#### you want. Function village (start) should allow you to go back and get supplies
 
-    elif answer in accross:
+    elif answer in accross or answer in east or answer in one:
         dead("""You really wish you had inspected the bridge.  A troll
 jumps out and eats you. Your adventure has ended.""")
 
-
+    elif answer in downstream or answer in south or answer in three:
+            print("""I'm sorry I haven't thought this far ahead yet. Instead
+you decide to take the path to your right.""")
+            print("""Ah what a great adventure this has been.  This path leads
+you back to your village.  You managed to stay alive and well.
+maybe next time you'll bring some supplies with you to help you on
+you journey. """)
+            exit(0)
     #########elif
     else:
             dead("""your unwillingness to choose the correct path placed
@@ -95,37 +121,54 @@ fall hitting your head on a rock.  You are now unconcious.""")
 #time you'll bring some supplies with you to help you on you journey. """)
 
 def troll_speak(answer):
+    ###if
     no_talk = True
-
-    while True:
     #choice = input("> ")
-        if answer in inspect_bridge:
+    # while loop not working correctly, if answer 2 is chosen it loops still
+    if answer in inspect_bridge:
+        while no_talk == True:
             print("""After inspecting the bridge you beleive it will hold your weight.
 however you notice a nasty looking troll lurking under it.  Do you 1. Try to
-cross anyway. 2. Choose the path that was to your right. 3. try to
-talk to the Troll  """)
+cross anyway. 2. Choose the path to the West. 3. try to talk to the Troll  """)
             answer = input("> ")
-            if answer in accross:
+            if answer in accross or answer in one:
                 dead("""The troll seems confused at first. It must have thought
 that after you saw it you would not cross. He then decides you must also be
 confused and he grabs you and eats you. Adventure over. """)
 
-            elif answer in talk_to_troll and no_talk:
+            elif answer in talk_to_troll or answer in three and no_talk:
 #future function for speaking in troll language function could be
 # talk_again. talk variable used for  while loop
                 print("""you try talking to the troll but it doesn't seem to
-understand you because you don't speak troll. Try again.""")
-                no_talk = False
+understand you because you don't speak troll. Do you 1. Try to
+cross anyway. 2. Choose the path to the West. 3. try to
+talk to the Troll again  .""")
+                no_talk == False
                 answer = input("> ")
                 troll_speak(answer)
-
+    elif answer in west or answer in two:
+        print("""Ah what a great adventure this has been.  This path leads
+you back to your village.  You managed to stay alive and well.
+maybe next time you'll bring some supplies with you to help you on
+you journey. """)
+        exit(0)
   #this gives multiple answers unable to decide answer and dead answers
   #I need a while loop for this one. if false run first talk to troll
   #if true run second print.
-        if answer in talk_to_troll or inspect_bridge and not no_talk:
-            dead("""This time the troll nods as you speak and waves at you to
+    elif answer in downstream:
+        print("""I'm sorry I haven't thought this far ahead yet. Instead
+you decide to take the path to your right.""")
+        print("""Ah what a great adventure this has been.  This path leads
+you back to your village.  You managed to stay alive and well.
+maybe next time you'll bring some supplies with you to help you on
+you journey. """)
+        exit(0)
+
+    if answer in talk_to_troll or inspect_bridge and not no_talk:
+        dead("""This time the troll nods as you speak and waves at you to
 come over the bridge.  As the troll grabs you and eats you,
 you realize he didn't understand you he just wanted to eat you.""")
+
 
 
 def dead(why):
